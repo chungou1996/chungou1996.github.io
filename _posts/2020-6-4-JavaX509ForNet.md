@@ -72,7 +72,7 @@ title: C# 关于兼容Java X509方式导出公钥的代码
 下面给出我的代码，希望有所启发吧,我构造了`DER`类用来解析DER结构，只暴露一个`ReadValue()`方法，以此来封装内部对于DER的处理。随后构造`SubjectPublicKeyInfo`类来使用DER解析公钥数组，最后返回RSA所使用的模数和指数。
 
 感谢收看。
-```CS
+```CSharp
 
 namespace DH.Secuirity
 {
