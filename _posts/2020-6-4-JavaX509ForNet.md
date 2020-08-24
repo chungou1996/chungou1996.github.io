@@ -32,15 +32,15 @@ title: C# 关于兼容Java X509方式导出公钥的代码
 		return cipher.doFinal(data);
 	}
 ```
-使用接口提供的publicKey对Pass加密，然后进行登录操作。
+  使用接口提供的publicKey对Pass加密，然后进行登录操作。
 当我在C#里尝试解析publicKey时，我发现C#并没有方法可以解析，原因是Java和.NET支持不同的标准。Java的X509EncodedKeySpec实际上是X.509标准中的SubjectPublicKeyInfo对象。而 . Net Core 3.0 以上时，可能提供了一个API`ImportSubjectPublicKeyInfo`来导入公钥（我并没有尝试过）。也就是说对于. Net Framework，无法通过只包含publicKey的证书来构造RSA对象。  
 
-在StackOverfolw上的讨论在[这里](https://stackoverflow.com/questions/52406728/what-is-equivalent-of-x509encodedkeyspec-in-c-sharp)。当然其实这个问题在谷歌上能找到更多的讨论，这里就不贴地址了，显然我无法改变大华平台来更改导出的方式。  
+  在StackOverfolw上的讨论在[这里](https://stackoverflow.com/questions/52406728/what-is-equivalent-of-x509encodedkeyspec-in-c-sharp)。当然其实这个问题在谷歌上能找到更多的讨论，这里就不贴地址了，显然我无法改变大华平台来更改导出的方式。  
 
-既然C#不提供这样的方法，只能自己造轮子了，造这个轮子需要两个知识点。  
+  既然C#不提供这样的方法，只能自己造轮子了，造这个轮子需要两个知识点。  
 1.对SubjectPublicKeyInfo结构的理解  
 2.对结构转数组的方式——DER有所了解  
-幸运的是，微软已经提供了很多资料，来[看看](https://docs.microsoft.com/zh-cn/windows/win32/seccertenroll/about-sequence)。
+  幸运的是，微软已经提供了很多资料，来[看看](https://docs.microsoft.com/zh-cn/windows/win32/seccertenroll/about-sequence)。
 
 ```
 30 81 9f                             ; SEQUENCE (9f Bytes)
