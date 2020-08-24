@@ -10,9 +10,8 @@ title: 颜のない月的汉化逆向分析
 pak_header magic GsPack4 abc  
 pak_data  
 pak_index  
-这三个块
-其中pak_header记录了pak_data和pak_index在pak文件中的偏移和长度。
-pak_index为LZSS加密，具体算法不在阐述，此算法在标准算法上有所改动，根据网上的一些资料和自己研究，花了两个晚上时间解决了加密算法，在C#上，由于byte在位运算后变为32位，会导致算法异常，将byte&0xff取低8位即可。  
+这三个块所组成的打包文件，其中pak_header记录了pak_data和pak_index在pak文件中的偏移和长度。  
+pak_index和下面的scw_data为LZSS加密，此算法在标准算法上有所改动，根据网上的一些资料和自己研究，花了两个晚上时间解决了加密算法，在C#上，由于byte在位运算后变为32位，会导致算法异常，将byte&0xff取低8位即可。  
 pak_index记录了文件在pak_data中的偏移和长度。  
 在剧本主要的SCR.PAK中，主要存放的是magic为Scw4.x的文件。  
 scw文件主要为  
